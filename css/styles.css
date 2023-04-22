@@ -6,6 +6,9 @@
   --another-accent-color: #f4f4fd;
   --primary-white-color: #ffffff;
   --primary-border-color: #e7e9fc;
+
+  --anim-duration: 250ms;
+  --anim-timing: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -100,6 +103,8 @@ p {
 }
 
 .nav.link {
+  position: relative;
+
   display: block;
 
   padding-top: 24px;
@@ -110,11 +115,32 @@ p {
   font-weight: 500;
   line-height: 1.5;
   text-decoration: none;
+
+  transition-duration: var(--anim-duration);
+  transition-timing-function: var(--anim-timing);
+  transition-property: color;
 }
 
+.nav.link.current,
 .nav.link:hover,
 .nav.link:focus {
   color: var(--secondary-accent-color);
+}
+
+.nav.link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  display: block;
+  width: 100%;
+  height: 4px;
+  border-radius: 4px;
+}
+
+.nav.link.current::after {
+  background-color: var(--secondary-accent-color);
 }
 
 /* Address */
@@ -139,6 +165,10 @@ p {
   letter-spacing: 0.02em;
   line-height: 1.5;
   text-decoration: none;
+
+  transition-duration: var(--anim-duration);
+  transition-timing-function: var(--anim-timing);
+  transition-property: color;
 }
 
 .address.link:hover,
@@ -207,6 +237,10 @@ p {
   font-size: 16px;
   line-height: 1.5;
   cursor: pointer;
+
+  transition-duration: var(--anim-duration);
+  transition-timing-function: var(--anim-timing);
+  transition-property: background-color;
 }
 
 .hero-button:hover,
@@ -347,6 +381,10 @@ p {
   border-radius: 50%;
 
   fill: var(--another-accent-color);
+
+  transition-duration: var(--anim-duration);
+  transition-timing-function: var(--anim-timing);
+  transition-property: background-color;
 }
 
 .social-media-link:hover,
@@ -386,6 +424,10 @@ p {
 
   border: 1px solid #8e8f99;
   border-radius: 4px;
+
+  transition-duration: var(--anim-duration);
+  transition-timing-function: var(--anim-timing);
+  transition-property: color, border;
 }
 
 .customer-logo-icon {
@@ -437,6 +479,10 @@ p {
   font-size: 16px;
   line-height: 1.5;
   cursor: pointer;
+
+  transition-duration: var(--anim-duration);
+  transition-timing-function: var(--anim-timing);
+  transition-property: color, background-color, border, box-shadow;
 }
 
 .filters-button:active,
@@ -463,6 +509,10 @@ p {
   display: block;
   text-decoration: none;
   color: var(--primary-text-color);
+
+  transition-duration: var(--anim-duration);
+  transition-timing-function: var(--anim-timing);
+  transition-property: box-shadow, transform;
 }
 
 .examples-card-discrb {
@@ -484,6 +534,40 @@ p {
 .examples .link:focus {
   box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08),
     0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
+}
+
+.examples .link:hover .examples-card-overlay,
+.examples .link:focus .examples-card-overlay {
+  transform: translateY(0);
+}
+
+.examples-card-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.examples-card-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  transform: translateY(100%);
+
+  width: 100%;
+  height: 100%;
+  padding-top: 40px;
+  padding-right: 32px;
+  padding-left: 32px;
+
+  background-color: var(--primary-accent-color);
+
+  transition-duration: var(--anim-duration);
+  transition-timing-function: var(--anim-timing);
+  transition-property: transform;
+}
+
+.examples-card-over {
+  color: var(--another-accent-color);
 }
 
 /* Footer */
@@ -554,6 +638,10 @@ p {
   border-radius: 50%;
 
   color: var(--another-accent-color);
+
+  transition-duration: var(--anim-duration);
+  transition-timing-function: var(--anim-timing);
+  transition-property: background-color;
 }
 
 .footer-social-media-link:hover,
@@ -563,4 +651,66 @@ p {
 
 .footer-social-madia-icon {
   fill: currentColor;
+}
+
+/* Modal window */
+
+.backdrop {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  background: rgba(46, 47, 66, 0.4);
+
+  transition-duration: var(--anim-duration);
+  transition-timing-function: var(--anim-timing);
+  transition-property: opacity, visibility;
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 408px;
+  min-height: 576px;
+  padding: 24px;
+
+  background-color: #fcfcfc;
+  border-radius: 4px;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.modal-btn {
+  display: block;
+  margin-left: auto;
+
+  width: 24px;
+  height: 24px;
+
+  background-color: var(--primary-border-color);
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+
+  transition-duration: var(--anim-duration);
+  transition-timing-function: var(--anim-timing);
+  transition-property: backgrounde-color, fill;
+}
+
+.modal-btn:hover,
+.modal-btn:focus,
+.modal-btn:active {
+  background-color: var(--secondary-accent-color);
+  fill: var(--primary-white-color);
 }
