@@ -130,7 +130,7 @@ p {
 .nav.link::after {
   content: "";
   position: absolute;
-  bottom: 0;
+  bottom: -1px;
   left: 0;
 
   display: block;
@@ -705,7 +705,7 @@ p {
 
   transition-duration: var(--anim-duration);
   transition-timing-function: var(--anim-timing);
-  transition-property: backgrounde-color, fill;
+  transition-property: background-color, fill;
 }
 
 .modal-btn:hover,
